@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etch A Sketch</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container"></div>
+    <script>
+        let newDiv
+        let numBoxes = 16 * 16
+        const container = document.querySelector(".container")
+
+        for (let i = 0; i < numBoxes; i++) {
+            newDiv = document.createElement("div")
+            newDiv.classList.add("box")
+            container.appendChild(newDiv)
+        }
+        
+        let boxes = document.querySelectorAll(".box")
+        let boxesArray = Array.from(boxes)
+        boxesArray.forEach(b => {
+            b.addEventListener("mouseover", (e) => {
+                e.target.style.backgroundColor = "#666"
+            })
+        })
+    </script>
+</body>
+</html>
