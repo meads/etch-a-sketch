@@ -7,25 +7,56 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="navbar">
+        <button onclick="setGrid()">Set Grid</button>
+    </div>
+    <br>
     <div class="container"></div>
     <script>
-        let newDiv
-        let numBoxes = 16 * 16
-        const container = document.querySelector(".container")
 
-        for (let i = 0; i < numBoxes; i++) {
-            newDiv = document.createElement("div")
-            newDiv.classList.add("box")
-            container.appendChild(newDiv)
+        // createGrid is a function that accepts a number as its' only 
+        // argument and creates a n x n grid appending divs to the container
+        // each cell in the grid has a mouseover event listener that 
+        // when triggered will change its background color.
+        function createGrid(n) {
+            let newDiv
+            let numBoxes = n * n
+            const container = document.querySelector(".container")
+
+            for (let i = 0; i < numBoxes; i++) {
+                newDiv = document.createElement("div")
+                newDiv.classList.add("box")
+                container.appendChild(newDiv)
+                newDiv.addEventListener("mouseover", (e) => {
+                    e.target.style.backgroundColor = "#666"
+                })
+            }
         }
-        
-        let boxes = document.querySelectorAll(".box")
-        let boxesArray = Array.from(boxes)
-        boxesArray.forEach(b => {
-            b.addEventListener("mouseover", (e) => {
-                e.target.style.backgroundColor = "#666"
-            })
-        })
+
+        // clearGrid will remove all cells from the grid when called
+        function clearGrid() {
+            const container = document.querySelector(".container")
+            container.innerHTML = ""
+        }
+
+        // setGrid will prompt the user for a number to use for the
+        // createGrid call allowing the user to specify different 
+        // sized grids
+        function setGrid() {
+            const input = prompt("Please enter a number (less than 100) to use for creating a n x n grid. ex. 16")
+            const n = Number(input)
+
+            if (n) {
+                if (Number.isInteger(n) && n <= 100) {
+                    clearGrid()
+                    createGrid(n)
+                    return 
+                }
+            } 
+            alert("Please enter a valid integer less than 100!")
+        }
+        createGrid(16)
+
     </script>
 </body>
 </html>
